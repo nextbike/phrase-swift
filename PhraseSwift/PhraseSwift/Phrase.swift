@@ -62,7 +62,7 @@ public final class Phrase {
             
             // Copy the original pattern to preserve all spans, such as bold, italic, etc.
             let sb = NSMutableAttributedString(string: pattern)
-            while let t = head?.next {
+            while let t = head {
                 t.expand(target: sb, data: keysToValue)
                 head = head!.next
             }
