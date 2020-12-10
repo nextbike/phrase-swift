@@ -89,6 +89,32 @@ class PhraseSwiftTests: XCTestCase {
         XCTAssert(secondOutput == "Hi, Hope you {second} it")
     }
     
+    func testStartsWithKeyLocalization() {
+        let firstOutput = Phrase(pattern: "{key} is awesome!")
+            .put(key: "key", value: "PhraseSwift")
+            .format()
+        XCTAssert(firstOutput == "PhraseSwift is awesome!")
+        
+        let secondOutput = Phrase(pattern: "{one} is better than {two}.")
+            .put(key: "one", value: "Two")
+            .put(key: "two", value: "one")
+            .format()
+        XCTAssert(secondOutput == "Two is better than one.")
+    }
+    
+    func testEndsWithKeyLocalization() {
+        let firstOutput = Phrase(pattern: "PhraseSwift is {stupid}")
+            .put(key: "stupid", value: "awesome")
+            .format()
+        XCTAssert(firstOutput == "PhraseSwift is awesome")
+        
+        let secondOutput = Phrase(pattern: "{one} is better than {two}")
+            .put(key: "one", value: "Two")
+            .put(key: "two", value: "one")
+            .format()
+        XCTAssert(secondOutput == "Two is better than one")
+    }
+    
     func testSpacedKeyLocalization() {
         let firstOutput = Phrase(pattern: "Hi, this is a {key one} test with {key two} keys.")
             .put(key: "key two", value: "multiple")
