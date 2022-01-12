@@ -47,6 +47,14 @@ class PhraseSwiftTests: XCTestCase {
         XCTAssert(secondOutput == "Hi, Hope you enjoy it")
     }
     
+    func testTwoKeysOnly() {
+        let output = Phrase.localize(
+            "{first} {second}",
+            keyValues: ["first": "Hello", "second": "world"]
+        )
+        XCTAssertEqual(output, "Hello world")
+    }
+    
     func testBidirectionalKeyValueLocalization() {
         let firstOutput = Phrase(pattern: "Hi, this is a {key_one} test with {key_two} keys.")
             .put(key: "key_two", value: "multiple")
