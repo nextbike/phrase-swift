@@ -65,6 +65,7 @@ public final class Phrase {
             while let t = head {
                 t.expand(target: sb, data: keysToValue)
                 head = head!.next
+                t.next = nil // Release the reference after it has been expanded
             }
             formatted = sb.string
             
