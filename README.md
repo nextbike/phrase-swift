@@ -13,10 +13,44 @@ This is a lightweight port of [Phrase - Android string formatting](https://githu
 
 ## Installation
 
-__CocoaPods only__: [CocoaPods](https://cocoapods.org/) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website.
+### Swift Package Manager (SPM)
+
+_This is the recommended way to install and use this library._
+ 
+ 
+#### Within an Xcode Project
+
+1. In Project Settings, on the tab "Package Dependencies", click "+" and add `github.com/nextbike/phrase-swift`
+2. You're done.
+
+
+#### `Package.swift`-Based SPM Project
+
+1. Add a dependency in Package.swift:
+    ```swift
+    dependencies: [
+        .package(url: "https://github.com/nextbike/phrase-swift", from: "1.0.0")
+    ]
+    ```
+2. For each relevant target, add a dependency
+    ```swift
+    .target(
+        name: "Example",
+        dependencies: [
+            .product(name: "PhraseSwift", package: "phrase-swift"),
+        ]
+    )
+    ```
+3. You're done.
+
+Also check out [Editing a package dependency as a local package](https://developer.apple.com/documentation/xcode/editing-a-package-dependency-as-a-local-package) to work in local changes within your existing project that uses this package.
+
+### CocoaPods
+
+[CocoaPods](https://cocoapods.org/) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website.
 
 ```
-pod 'PhraseSwift', :git => 'https://github.com/nextbike/phrase-swift.git'
+pod 'PhraseSwift', :git => 'https://github.com/nextbike/phrase-swift.git', '~> 1.0.0
 ```
 
 ## Usage
@@ -33,4 +67,4 @@ let output = Phrase.localize(source, keyValues: ["world": "nextbike"])
 
 ## How to test
 
-Includes a suite of unit tests to cover frequent cases of placeholder location and handling within strings. Open in Xcode and run the tests to see the coverage.
+Includes a suite of unit tests to cover frequent cases of placeholder location and handling within strings. Run `swift test` or open up the Swift Package within Xcode.
