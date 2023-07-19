@@ -2,11 +2,11 @@
 
 **Description**:  Use curly bracket placeholders within strings [just like on Android](https://github.com/square/phrase). We created this in order to use the same translation phrases for both our Android and iOS apps.
 
-This is a lightweight port of [Phrase - Android string formatting](https://github.com/square/phrase) into Swift 5 and used in production for our iOS customer app. It has no other dependencies and can be installed using CocoaPods.
+This is a lightweight port of [Phrase - Android string formatting](https://github.com/square/phrase) into Swift 5 and used in production for our iOS customer app. It has no other dependencies and can be installed using Swift Package Manager or CocoaPods.
 
 ## Features
 
-- Replace placeholders with curly brackets within strings with corresponding content (`Hello, my name is {name}` becomes `"Hello, my name is Ada"`)
+- Replace placeholders with curly brackets within strings with corresponding content (`"Hello, my name is {name}"` becomes `"Hello, my name is Ada"`)
 - Supports multiple placeholders per string
 - When using [Phrase](https://github.com/square/phrase) for Android and [PhraseSwift](https://github.com/nextbike/phrase-swift) for iOS, you can use the same translation sources for both platforms
 - Licence: [Apache 2.0](https://github.com/nextbike/phrase-swift/blob/master/LICENSE)
@@ -20,8 +20,7 @@ _This is the recommended way to install and use this library._
  
 #### Within an Xcode Project
 
-1. In Project Settings, on the tab "Package Dependencies", click "+" and add `github.com/nextbike/phrase-swift`
-2. You're done.
+In Project Settings, on the tab "Package Dependencies", click "+" and add `github.com/nextbike/phrase-swift`
 
 
 #### `Package.swift`-Based SPM Project
@@ -41,7 +40,6 @@ _This is the recommended way to install and use this library._
         ]
     )
     ```
-3. You're done.
 
 Also check out [Editing a package dependency as a local package](https://developer.apple.com/documentation/xcode/editing-a-package-dependency-as-a-local-package) to work in local changes within your existing project that uses this package.
 
