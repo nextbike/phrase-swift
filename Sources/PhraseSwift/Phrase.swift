@@ -29,7 +29,7 @@ public final class Phrase {
     // indicates parsing is complete
     
     // TODO: make it int 1
-    public static let EOF: Character = Character(UnicodeScalar(0))
+    public static let EOF: Character = Character(Unicode.Scalar(0))
     
     @discardableResult public func put(key: String, value: String) -> Phrase {
         guard keys.contains(key) else  {
@@ -243,8 +243,16 @@ public final class Phrase {
         }
         
         override func expand(target: NSMutableAttributedString ,data:  [String: String] ) {
-            let start = getFormattedStart()
-            target.replace(start: start, end: start + 2, toReplaceWith: "\(PhraseConfig.shared.keyStartChar)")
+            let replaceFrom = target.string.index(target.string.startIndex, offsetBy: getFormattedStart())
+            let replaceTo = target.string.index(replaceFrom, offsetBy: 1)
+            
+            
+            let expanded = target.string.replacingCharacters(
+                in: replaceFrom...replaceTo,
+                with: "\(PhraseConfig.shared.keyStartChar)"
+            )
+            
+            target.setAttributedString(NSAttributedString(string: expanded))
         }
         
         override func getFormattedLength() -> Int {
@@ -253,7 +261,7 @@ public final class Phrase {
         }
     }
     
-    private  class KeyToken : Token {
+    private class KeyToken : Token {
         /** The key without { and }. */
         private var key : String
         private var value : String?
@@ -265,12 +273,19 @@ public final class Phrase {
         
         override func expand( target: NSMutableAttributedString,  data: [String: String]) {
             value = data[key]
-            let replaceFrom = getFormattedStart()
+            guard let value else { return }
+            
+            let replaceFrom = target.string.index(target.string.startIndex, offsetBy: getFormattedStart())
             
             // Add 2 to account for the opening and closing brackets.
-            let replaceTo = replaceFrom + key.count + 2
+            let replaceTo = target.string.index(
+                target.string.startIndex,
+                offsetBy: getFormattedStart() + key.count + 2
+            )
             
-            target.replace(start: replaceFrom, end: replaceTo, toReplaceWith: value)
+            let expanded = target.string.replacingCharacters(in: replaceFrom..<replaceTo, with: value)
+            
+            target.setAttributedString(NSAttributedString(string: expanded))
         }
         
         override func getFormattedLength() -> Int {

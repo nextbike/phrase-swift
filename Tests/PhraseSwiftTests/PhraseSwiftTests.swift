@@ -216,11 +216,21 @@ class PhraseSwiftTests: XCTestCase {
         XCTAssert(secondOutput == "Hi, this is a bidirectional test with multiple keys.")
     }
     
-    func testUserGreeting() {
+    func testUserGreeting() {       
         
-        let firstOutput = Phrase.localize("👋 Hey {username} !",
-                                          keyValues: ["username": "Rider"])
+        XCTAssertEqual(Phrase.localize(
+            "👋 Hey {username} !",
+            keyValues: ["username": "Rider"]
+        ), "👋 Hey Rider !")
         
-        XCTAssert(firstOutput == "👋 Hey Rider !")
+        XCTAssertEqual(Phrase.localize(
+            "Hey {username}! 👋",
+            keyValues: ["username": "Rider"]
+        ), "Hey Rider! 👋")
+        
+        XCTAssertEqual(Phrase.localize(
+            "Hey {username} 👋!",
+            keyValues: ["username": "Rider"]
+        ), "Hey Rider 👋!")
     }
 }
