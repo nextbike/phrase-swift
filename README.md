@@ -28,7 +28,7 @@ In Project Settings, on the tab "Package Dependencies", click "+" and add `githu
 1. Add a dependency in Package.swift:
     ```swift
     dependencies: [
-        .package(url: "https://github.com/nextbike/phrase-swift", from: "1.0.0")
+        .package(url: "https://github.com/nextbike/phrase-swift", from: "1.0.1")
     ]
     ```
 2. For each relevant target, add a dependency
@@ -48,7 +48,7 @@ Also check out [Editing a package dependency as a local package](https://develop
 [CocoaPods](https://cocoapods.org/) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website.
 
 ```
-pod 'PhraseSwift', :git => 'https://github.com/nextbike/phrase-swift.git', '~> 1.0.0
+pod 'PhraseSwift', :git => 'https://github.com/nextbike/phrase-swift.git', '~> 1.0.1
 ```
 
 ## Usage
